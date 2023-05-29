@@ -56,11 +56,10 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
-        with:
-          # Upload entire repository
-          path: '.'
 
   deploy:
+    # Add a dependency to the build job
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

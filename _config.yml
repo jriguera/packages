@@ -2,8 +2,8 @@ title: Packages
 email: jriguera@users.noreply.github.com
 description: >- 
   This is a repository for OS packages
-baseurl: ""
-url: "https://jose.riguera.es/packages/"
+baseurl: "https://jose.riguera.es"
+url: "/packages"
 github_username: jriguera
 
 # Build settings

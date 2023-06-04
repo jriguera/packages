@@ -51,6 +51,10 @@ jobs:
           source: ./
           destination: ./_site
 
+      - name: Install required packages
+        run: |
+          ls -lR ./_site
+
 #      - name: Set permissions on the _site directory
 #        run: sudo chown -R runner:docker _site
 

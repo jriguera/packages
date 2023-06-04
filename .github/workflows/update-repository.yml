@@ -30,17 +30,25 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y jq  createrepo-c coreutils gnupg2 dpkg-dev aptly
-          
-      - name: Import GPG key
-        id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v5
-        with:
-          gpg_private_key: ${{ secrets.REPO_PRIVATE_KEY }}
 
-      - name: Confirm GPG Key loaded
+      - name: Install required packages
         run: |
-          gpg --list-keys
-          echo "${{ steps.import_gpg.outputs.fingerprint }}"
+          sudo apt update
+          sudo apt install -y jq  createrepo-c coreutils gnupg2 dpkg-dev aptly
+
+      - name: Generate Deb repository
+        run: |
+          mkdir APTLY_DIR
+          ./deb-repo.sh bullseye
+        env:
+          APTLY_DIR: "${{ runner.temp }}/aptly"
+          REPOSITORY_DIR: "${{ github.workspace }}/deb"
+          REPOSITORY_PACKAGES: "${{ github.workspace }}/incoming/deb"
+          REPOSITORY_COMPONENT: "main"
+          REPOSITORY_DISTRIBUTION: "testing"
+          REPOSITORY_ORIGIN: "${{ github.repository }}"
+          REPOSITORY_GPG_KEY: ${{ secrets.REPO_PRIVATE_KEY }}
+          REPOSITORY_GPG_KEYID: "8C4F8B34CBDE742740EBA9785DA8BA8396FE7340"
 
       - name: Setup Pages
         uses: actions/configure-pages@v3

@@ -9,4 +9,5 @@ github_username: jriguera
 # Build settings
 theme: jekyll-theme-hacker
 plugins: []
-exclude: []
+exclude:
+- incoming

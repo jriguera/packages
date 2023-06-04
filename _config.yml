@@ -7,6 +7,6 @@ url: "https://jose.riguera.es"
 github_username: jriguera
 
 # Build settings
-theme: hacker
+theme: jekyll-theme-hacker
 plugins: []
 exclude: []

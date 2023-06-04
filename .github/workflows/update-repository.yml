@@ -1,4 +1,4 @@
-name: Deploy Debian and RPM Repo plus Jekyll homepage
+name: Deploy Package repositories and homepage
 
 on:
   # Runs on pushes targeting the default branch
@@ -29,8 +29,8 @@ jobs:
       - name: Install required packages
         run: |
           sudo apt update
-          sudo apt install -y jq createrepo-c coreutils gnupg2 dpkg-dev
-
+          sudo apt install -y jq  createrepo-c coreutils gnupg2 dpkg-dev aptly
+          
       - name: Import GPG key
         id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v5
@@ -51,8 +51,8 @@ jobs:
           source: ./
           destination: ./_site
 
-      - name: Set permissions on the _site directory
-        run: sudo chown -R runner:docker _site
+#      - name: Set permissions on the _site directory
+#        run: sudo chown -R runner:docker _site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1

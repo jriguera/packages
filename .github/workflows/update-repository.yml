@@ -25,11 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Install required packages
-        run: |
-          sudo apt update
-          sudo apt install -y jq  createrepo-c coreutils gnupg2 dpkg-dev aptly
+        with:
+          lfs: true
 
       - name: Install required packages
         run: |
@@ -48,7 +45,7 @@ jobs:
           REPOSITORY_DISTRIBUTION: "testing"
           REPOSITORY_ORIGIN: "${{ github.repository }}"
           REPOSITORY_GPG_KEY: ${{ secrets.REPO_PRIVATE_KEY }}
-          REPOSITORY_GPG_KEYID: "8C4F8B34CBDE742740EBA9785DA8BA8396FE7340"
+          REPOSITORY_GPG_KEYID: "${{ secrets.REPO_PRIVATE_KEY_ID }}"
 
       - name: Setup Pages
         uses: actions/configure-pages@v3

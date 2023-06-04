@@ -23,7 +23,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout with LFS
         uses: actions/checkout@v3
         with:
           lfs: true
@@ -33,10 +33,10 @@ jobs:
           sudo apt update
           sudo apt install -y jq  createrepo-c coreutils gnupg2 dpkg-dev aptly
 
-      - name: Generate Deb repository
+      - name: Generate Deb repositories
         run: |
-          mkdir APTLY_DIR
-          ./deb-repo.sh bullseye
+          mkdir ${APTLY_DIR}
+          ./deb-repo.sh jackages
         env:
           APTLY_DIR: "${{ runner.temp }}/aptly"
           REPOSITORY_DIR: "${{ github.workspace }}/deb"
@@ -55,13 +55,6 @@ jobs:
         with:
           source: ./
           destination: ./_site
-
-      - name: Install required packages
-        run: |
-          ls -lR ./_site
-
-#      - name: Set permissions on the _site directory
-#        run: sudo chown -R runner:docker _site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1

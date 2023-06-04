@@ -18,9 +18,8 @@ List of current [packages](PACKAGES-deb.md) in the repositories.
 ### Setup Repositories
 
 ```
-sudo apt-get install apt-transport-https
-wget -qO - https://jose.riguera.es/packages/gpg | sudo apt-key add -
-echo "deb https://jose.riguera.es/packages/deb debian main" | sudo tee /etc/apt/sources.list.d/jackages.list
+wget -qO - https://jose.riguera.es/packages/deb/gpg | sudo gpg --dearmor > /etc/apt/trusted.gpg.d/jackages.gpg
+echo "deb https://jose.riguera.es/packages/deb/jackages testing main" | sudo tee /etc/apt/sources.list.d/jackages.list
 ```
 
 ## RedHat based distributions

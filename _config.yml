@@ -1,7 +1,7 @@
-title: Packages
+title: jackages
 email: jriguera@users.noreply.github.com
 description: >- 
-  This is a repository for OS packages
+  just a repository for my OS packages
 baseurl: "/packages"
 url: "https://jose.riguera.es"
 github_username: jriguera
